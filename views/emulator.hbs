@@ -1,0 +1,54 @@
+
+<script src="/lib/keypress/keypress.js"></script>
+<script src="/lib/socket.io/socket.io.js"></script>
+
+<script>
+const socket = io.connect({{site.url}});
+let imgArr;
+socket.on('private',(data) => {
+	if(typeof data === typeof []){
+		//console.log(data);
+		imgArr = data;
+		const height = 224,width = 256; //height is actually 256, but its a rotated image
+		const buffer = new Uint8ClampedArray(width*height*4);
+		for(let y = 0;y < height;y++){
+			for(let x = 0;x < width;x++){
+				let pos = (y*width+x) * 4;
+				buffer[pos] = 255*imgArr[pos/4];
+				buffer[pos+1] = 255*imgArr[pos/4];
+				buffer[pos+2] = 255*imgArr[pos/4];
+				buffer[pos+3] = 255//255*imgArr[pos];
+				/*if(imgArr[pos] !== 1 && imgArr[pos] !== 0){
+					console.log(imgArr[pos]);
+				}*/
+				
+			}
+		}
+
+		const canvas = document.createElement('canvas');
+		const ctx = canvas.getContext('2d');
+		canvas.width = width;
+		canvas.height = height;
+		const idata = ctx.createImageData(width,height);
+		idata.data.set(buffer);
+		ctx.putImageData(idata,0,0);
+		const dataUri = canvas.toDataURL();
+		const image = new Image();
+		image.src = dataUri;
+		console.log(dataUri);
+		document.body.appendChild(image);
+
+	}
+	else{
+		console.log(data);
+		socket.emit('private', {msg: 'Thank you for your message'})
+	}
+});
+
+const listener = new window.keypress.Listener();
+listener.simple_combo("left", function() {
+   socket.emit('private','left');
+});
+
+
+</script>

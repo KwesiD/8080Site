@@ -1,0 +1,62 @@
+<div>
+	</br>
+		<font size="4">
+			&lt;PLAYER 1&gt;
+			ENTER INITIALS TO START
+		</font>
+	</br>
+	</br>
+</div>
+
+
+{{#if errors.registrationComplete}}
+	
+	Thank you for registering with us!!!
+	Please log in!
+
+{{else}}
+
+	<form method="POST" action="">
+		
+		{{#if errors.userExists}}
+			<p style="color:#FF0000;">Username already exists!!</p>
+		{{/if}}
+		{{#if errors.emptyUser}}
+			<p style="color:#FF0000;">Cannot leave this field empty!!</p>
+		{{/if}}
+		Username:</br>
+		<input type="text" class="credbox" name="username"/></br>
+
+		{{#if errors.passMismatch}}
+			<p style="color:#FF0000;">Passwords do not match!!</p>
+		{{/if}}
+		{{#if errors.emptyPass}}
+			<p style="color:#FF0000;">Cannot leave this field empty!!</p>
+		{{/if}}
+		Password:</br>
+		<input type="password" class="credbox" name="password"/></br>
+		{{#if errors.passMismatch}}
+			<p style="color:#FF0000;">Passwords do not match!!</p>
+		{{/if}}
+		{{#if errors.emptyConfirm}}
+			<p style="color:#FF0000;">Cannot leave this field empty!!</p>
+		{{/if}}
+		Retype Password:</br>
+		<input type="password" class="credbox" name="passwordConfirm"/></br>
+
+		
+		<select name="countries">  
+		{{#each countries as |country|}}      
+            <option value="{{country.name}}">{{country.name}}</option></br>
+        {{/each}}
+   		</select>
+
+   		</br>
+
+		<input type="submit" class="login" name="login" value="Register"/>
+
+
+	</form>
+
+{{/if}}
+

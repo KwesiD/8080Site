@@ -1,0 +1,31 @@
+/*
+<div id="cf">
+  <img class="0" src="/images/balloon.jpg" />
+  <img class="1" src="/images/invaders.jpg" />
+  <img class="2" src="/images/lunar.jpg" />
+  <img class="3" src="/images/midway.jpg" />
+  <img class="4" src="/images/machine.png" />
+  <img class="5" src="/images/taito.png" />
+
+</div>*/
+
+
+imgdiv {
+  position: relative;
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  margin-top: 150px;
+}
+
+table{
+  width: 70%
+}
+div{
+   word-wrap: break-word;
+  width: 600px;
+}
+.mainimage{
+  max-width: 400px;
+}
+

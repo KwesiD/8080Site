@@ -1,0 +1,125 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+<!--
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script src="/validation/fblogin.js"></script>
+
+<script>
+function checkLoginState(){
+	FB.getLoginStatus(function(response) {
+	    if (response.status === 'connected') {
+	    	  FB.api('/me', function(response) {
+	    	  	let fbid = response.id;
+	    	  	let fbname = response.name;
+	    	 	post('/login/fblogin',{name:fbname,fbid:fbid});
+      			//console.log(response);
+    		  });
+	    }
+	});
+}
+
+
+/**
+https://stackoverflow.com/a/133997
+**/
+function post(path, params, method) {
+    method = method || "post"; // Set method to post by default if not specified.
+
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+        }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
+
+
+
+</script>
+-->
+
+<div>
+	</br>
+		<font size="4">
+			&lt;PLAYER 1&gt;
+			INSERT CREDIT TO CONTINUE
+		</font>
+	</br>
+	</br>
+</div>
+
+
+
+<form method="POST" action="">
+	
+	{{#if errors.userNotFound}}
+			<p style="color:#FF0000;">Username not found!! Are you trying to <a href='/register'>register?<a></p>
+	{{/if}}
+	{{#if errors.emptyUser}}
+			<p style="color:#FF0000;">Cannot leave username blank!!</p>
+		{{/if}}
+	Username:</br>
+	<input type="text" class="credbox" name="username"/></br>
+	{{#if errors.wrongPass}}
+			<p style="color:#FF0000;">Invalid Password!!</p>
+	{{/if}}
+	{{#if errors.emptyPass}}
+			<p style="color:#FF0000;">Cannot leave password blank!!</p>
+		{{/if}}
+	Password:</br>
+	<input type="password" class="credbox" name="password"/></br>
+
+	<input type="submit" class="login" name="login" value="Log In"/>
+
+
+</form>
+
+
+</br></br>
+Login with Facebook
+</br>
+
+<div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="true" onlogin="loginStatus();"></div>
+
+</br>
+
+<!--
+<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="true" ></div>
+
+</br>
+
+
+<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button> 
+-->
+
+
+

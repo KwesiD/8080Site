@@ -1,0 +1,56 @@
+<head>
+  <link rel="stylesheet" href="css/home.css">
+</head>
+
+
+<imgdiv>
+	 <img id="centerImage" class="mainimage" src=""/>
+	 </br></br>
+	 <div id="desc"></div>
+
+</imgdiv>
+
+<hr>
+
+<table>
+<tr>
+    <th>Username</th>
+    <th>Country</th> 
+    <th>Game</th>
+</tr>
+
+
+{{#each recentPlays as |user|}}
+<tr>
+    <th>{{user.username}}</th>
+    <th>{{user.country}}</th> 
+    <th>Space Invaders</th>
+</tr>
+{{/each}}
+</table>
+
+
+<script type="text/javascript" src='/descriptions/descriptions.js'></script>
+
+<script>
+	document.addEventListener("DOMContentLoaded",shuffleImage);
+	function shuffleImage(){
+		let images = ["invaders.jpg","lunar.jpg","midway.jpg","machine.png","taito.png","balloon.jpg"];
+		let i = Math.round(Math.random()*(images.length-1));
+		let currImage = document.getElementById("centerImage");
+		currImage.src = "/images/" + images[i];
+		setText(images[i]);
+
+	}
+
+	function setText(descName){
+		let div = document.getElementById("desc");
+		descName = descName.split('.')[0];
+		let description = document.createTextNode(gameDescriptions[descName]);
+		console.log(div);
+		div.appendChild(description);
+				
+
+	}
+</script>
+

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<!--FB Auth-->
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+<script src="/validation/fb.js"></script>
+
+
+<head>
+  <link rel="stylesheet" href="/css/site.css">
+</head>
+
+<h1><a href="/home"><div class='header'>Arcade4All<img class = "logo" src='/images/alienlogo.jpg'></img></div></a></h1>
+
+<div class="menubar">
+  <button onclick="displayMenu('gamedropdown');" class="dropbtn">Games</button>
+  <div id="gamedropdown" class="dropdown-content">
+    <a href="/invaders">Space Invaders</a>
+  </div>
+   <button onclick="displayMenu('aboutdropdown');" class="dropbtn">About</button>
+  <div id="aboutdropdown" class="dropdown-content">
+    <a href="/about">About Me</a>
+  </div>
+  <a href="/profile"><button class="menubtn">Profile</button></a>
+  <a href="/register"><button class="menubtn">Register</button></a>
+  <a href="/login"><button class="menubtn">Login</button></a>
+</div>
+
+{{{body}}}
+
+
+</html>
+
+<script>
+function displayMenu(menu) {
+	let otherMenus = document.getElementsByClassName("dropdown-content");
+	Array.from(otherMenus).forEach((sel) => {
+		let style = window.getComputedStyle(sel);
+		//console.log(style)
+		if(style.display === 'block'){
+			if(sel.id !== menu){
+				sel.classList.toggle("show");
+			}
+		}
+		else if(sel.id === menu){
+			sel.classList.toggle("show");
+		}
+	});
+	
+}
+</script>

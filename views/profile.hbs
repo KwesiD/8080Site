@@ -1,0 +1,67 @@
+
+<h2>{{user.username}}</h2>
+
+<h2>{{user.country}} <img src="../flags/{{countrycode}}.png"></img></h2>
+
+<h2>Tokens:{{user.tokens}}</h2>
+
+{{#if fb}}
+
+{{/if}}
+
+
+</br>
+</br>
+</br>
+</br>
+
+<form method="POST" action="">
+Send a Friend Request:
+{{#if states.notFound}}
+<p style="color:#FF0000;">User not found!!</p>
+{{/if}}
+{{#if states.friendSelf}}
+<p style="color:#FF0000;">You can't befriend yourself!!</p>
+{{/if}}
+<input type="hidden" name="type" value="request"/>
+<input type="text" name="friendName"/></br>
+<input type="submit" class="login" name="sendRequest" value="Send Request"/>
+</form>
+
+
+
+
+
+{{#if states.haveTokens}}
+
+{{else}}
+	Click here to add a few tokens!
+	<form method="POST" action="">
+	<input type="hidden" name="type" value="tokens"/>
+	<input type="submit" class="login" name="reject" value="Add Tokens"/>
+	</form>
+
+{{/if}}
+
+Your Friends: </br>
+{{#each friends as |friend|}}
+	{{friend.username}} </br>
+{{/each}}
+
+{{#if states.haveRequest}}
+	You have friend requests waiting!!
+	</br>
+	{{#each friendRequests as |request|}}
+	<form method="POST" action="">
+	You have a friend request from {{request.requestor.username}}!!
+	<input type="hidden" name="type" value="acceptreject"/>
+	<input type="hidden" name="buttonType" value=""/>
+	<input type="hidden" name="requestor" value="{{request.requestor.username}}"/>
+	<input type="submit" onClick='buttonType.value=this.name' class="login" name="accept" value="Accept Request"/>
+	<input type="submit" onClick='buttonType.value=this.name' class="login" name="reject" value="Reject Request"/>
+	</form>
+	{{/each}}
+{{/if}}
+
+
+<a href="/logout">Logout<a>

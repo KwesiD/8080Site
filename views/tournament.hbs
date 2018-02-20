@@ -1,0 +1,65 @@
+
+
+Fight for the highest scores amongst your friends!
+<br>
+<br>
+
+
+{{#if enabled}}
+<form method="POST" action="">
+
+Format:
+<br>
+
+<div class="row">
+	
+{{#if error.style}}
+	<p style="color:#FF0000;">No style selected!!</p>
+{{/if}}
+	Style:
+    <input type="radio" class="selectanswer" name="style"/>Highest Score
+    <input type="radio" class="selectanswer" name="style"/>Head-to-head
+</div>
+
+<br> 
+<br>
+
+<div>
+	
+{{#if error.participants}}
+	<p style="color:#FF0000;">No participants added!!</p>
+{{/if}}
+	Number of Participants:
+	<input type="number" step="1" value="0" name="participants">
+</div>
+
+<br> 
+<br>
+
+
+{{#if error.friends}}
+	<p style="color:#FF0000;">No friends added!! </p>
+{{/if}}
+<div>
+	Add Friends:
+	<select>
+	<option value="standard">No friends to add yet.</option>
+	</select>
+</div>
+
+<br>
+<br>
+<input type="submit" value="Create Tournament">
+</form>
+
+{{else}}
+
+<p style="color:#FF0000;">You don't have tournaments enabled!!</p>
+
+{{/if}}
+
+{{#if created}}
+	<p style="color:#FF0000;">Tournament Created</p>
+{{/if}}
+
+

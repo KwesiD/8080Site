@@ -1,0 +1,43 @@
+
+User: {{user.username}} <br>
+Tokens: {{user.tokens}} <br>
+Country: {{user.country}} <br>
+
+{{#if error.tokenError}}
+	<p style="color:#FF0000;">Not Enough Tokens to Purchase!!</p>
+{{/if}}
+{{#if error.noPurchase}}
+	<p style="color:#FF0000;">Select an item before purcahsing!!</p>
+{{/if}}
+<form action="" method="post">
+<input type="hidden" name="tokens" value={{user.tokens}}>
+<input type="hidden" name="userid" value={{user._id}}>
+<h2>Games</h2>
+
+{{#each games as |game|}}
+	<image style="display: inline; margin: 0 5px;" src={{game.image}} width="200" height="200" align="middle">	
+{{/each}}
+<br>
+{{#each games as |game|}}
+	{{#if game.purchased}}
+		&emsp;{{game.name}} (Purchased) &emsp;
+	{{else}}
+		{{game.name}}<input type="checkbox" name="select" value="{{game._id}}"> Tokens: {{game.cost}} &emsp;
+	{{/if}}
+{{/each}}
+<h2>Features</h2>
+
+{{#each features as |feature|}}
+	<image style="display: inline; margin: 0 5px;" src={{feature.image}} width="200" height="200" align="middle">
+{{/each}}
+<br>
+{{#each features as |feature|}}
+	{{#if feature.purchased}}
+		{{feature.name}} (Purchased);&emsp;
+	{{else}}	
+		{{feature.name}}<input type="checkbox" name="select" value="{{feature._id}}"> Tokens: {{feature.cost}} &emsp;
+	{{/if}}
+{{/each}}
+<p> <button type="submit">Purchase</button> </p>
+
+</form>

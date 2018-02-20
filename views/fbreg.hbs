@@ -1,0 +1,112 @@
+<!--
+<div id="fb-root"></div>
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+<script src="/validation/fbreg.js"></script>
+
+
+
+<script>
+function checkLoginState(){
+	FB.getLoginStatus(function(response) {
+	    if (response.status === 'connected') {
+	    	  FB.api('/me', function(response) {
+	    	  	let fbid = response.id;
+	    	  	let fbname = response.name;
+	    	 	post('/login/fblogin',{name:fbname,fbid:fbid});
+      			//console.log(response);
+    		  });
+	    }
+	    else{
+	    	window.location = "/home";
+	    }
+	});
+}
+
+
+/**
+https://stackoverflow.com/a/133997
+**/
+function post(path, params, method) {
+    method = method || "post"; // Set method to post by default if not specified.
+
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+        }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
+</script> 
+-->
+
+<div>
+	</br>
+		<font size="4">
+			&lt;PLAYER 1&gt;
+			ENTER INITIALS TO START
+		</font>
+	</br>
+	</br>
+</div>
+
+<h2>Registering with Facebook?</h2>
+
+	<form id="register" method="POST" action="">
+		{{#if errors.idFound}}
+			<p style="color:#FF0000;">Account already linked to this Facebook account!!</p>
+		{{/if}}
+
+		{{#if errors.userFound}}
+			<p style="color:#FF0000;">Username already exists!!</p>
+		{{/if}}
+		{{#if errors.emptyUser}}
+			<p style="color:#FF0000;">Cannot leave this field empty!!</p>
+		{{/if}}
+		Username:</br>
+		<input type="text" class="credbox" name="username"/></br>
+
+
+		<select name="countries">  
+		{{#each countries as |country|}}      
+            <option value="{{country.name}}">{{country.name}}</option></br>
+        {{/each}}
+   		</select>
+
+   		</br>
+
+
+
+		<input type="submit" class="login" name="login" value="Register"/>
+
+	</form>
+
+
+
+
+
+</br>
+
+<div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="true" onlogin="loginStatus();"></div>
+
+</br>
